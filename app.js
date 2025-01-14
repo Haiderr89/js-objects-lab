@@ -187,12 +187,12 @@ Also, log the `game.items` array to confirm that the pokeball quantity is being 
 
 Solve Exercise 11 here:
 */
-game.catchPokemon = (pokemonObj)=>{
-  game.party.push(pokemonObj);
-  
-  // const pokeball = game.items.find(item => item.name === "pokeball");
-  if (game.items.name === 'pokeball') {
-    pokeball.quantity = pokeball.quantity -1; 
+game.catchPokemon = (pokemonObj)=>{  
+  for(let ball of game.items){
+  if (ball.name === 'pokeball' && ball.quantity > 0) {
+    game.party.push(pokemonObj);
+    ball.quantity--; 
+  }
   }
 }
 
@@ -249,15 +249,14 @@ game.gymStatus = () => {
   }
 
   for(let tall of game.gyms){
-
-    if (tall.complete === true) {
+    if (tall.completed === true) {
       gymTally.complete++;
     } 
     else {
       gymTally.incomplete++;
     }
   }
-  console.log(`completed: ${gymTally.complete},incomplete: ${gymTally.incomplete}`);
+  console.log(gymTally);
 }
 game.gymStatus();
 
